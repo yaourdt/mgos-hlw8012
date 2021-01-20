@@ -17,8 +17,9 @@ void handleCf1Interrupt(int pin, void *ud) {
 	(void) pin;
 }
 
-static void mgos_hlw8012_time_change_cb(void *ud) {
+static void mgos_hlw8012_time_change_cb(int ev, void *evd, void *ud) {
 	mgos_hlw8012_resetEnergy();
+	(void) evd;
 	(void) ud;
 }
 
