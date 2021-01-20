@@ -17,6 +17,11 @@ void handleCf1Interrupt(int pin, void *ud) {
 	(void) pin;
 }
 
+static void mgos_hlw8012_time_change_cb(void *ud) {
+	mgos_hlw8012_resetEnergy();
+	(void) ud;
+}
+
 bool mgos_hlw8012_init() {
 	if ( mgos_sys_config_get_hlw8012_cf_pin()  == -1 ) { return false; }
 	if ( mgos_sys_config_get_hlw8012_cf1_pin() == -1 ) { return false; }
@@ -43,6 +48,10 @@ bool mgos_hlw8012_init() {
 	if (mgos_sys_config_get_hlw8012_power_multiplier() != 0.0) {
 		mgos_hlw8012_setPowerMultiplier(mgos_sys_config_get_hlw8012_power_multiplier());
 	}
+
+	// changing the system time should reset the energy counter
+	mgos_event_add_handler(MGOS_EVENT_TIME_CHANGED, mgos_hlw8012_time_change_cb, NULL);
+
 	return true;
 }
 
