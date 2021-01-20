@@ -1,0 +1,27 @@
+author: mark dornbach <mark@dornbach.io>
+description: HLW8012 and BL0937 sensors library
+type: lib
+version: 0.0.1
+
+platforms:           ["esp32", "esp8266"]
+manifest_version:    2020-01-29
+sources:             [src]
+includes:            [include]
+tags:                [c, sensors]
+
+config_schema:
+  - ["hlw8012", "o", {title: "HLW8012 and BL0937 sensors"}]
+  - ["hlw8012.enable", "b", true, {title: "enable config via mos.yml file"}]
+  - ["hlw8012.cf_pin", "i", -1, {title: "cf_pin"}]
+  - ["hlw8012.cf1_pin", "i", -1, {title: "cf1_pin"}]
+  - ["hlw8012.sel_pin", "i", -1, {title: "sel_pin"}]
+  - ["hlw8012.currentWhen", "i", 0, {title: "normally leave it at LOW=0, unless you have a rather exotic device, then use HIGH=1"}]
+  - ["hlw8012.interrupt", "b", true, {title: "if true, use interrupt driven mode (default)"}]
+  - ["hlw8012.pulse_timeout", "d", 3000000, {title: "pulse timeout in microseconds (defaults to 3 seconds)"}]
+  - ["hlw8012.voltage_multiplier", "d", 0.0, {title: "voltage multiplier"}]
+  - ["hlw8012.power_multiplier", "d", 0.0, {title: "active power multiplier"}]
+  - ["hlw8012.current_multiplier", "d", 0.0, {title: "current multiplier"}]
+
+libs:
+  - origin: https://github.com/mongoose-os-libs/arduino-compat
+    version: latest  #TODO use stable version as soon as pulseIn is supported
