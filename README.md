@@ -14,7 +14,6 @@ config_schema:
 
 libs:
   - origin: https://github.com/yaourdt/mgos-hlw8012
-    version: main
 ```
 
 Further parameters can be found in this libraries `mos.yml` file, all of them
@@ -48,6 +47,14 @@ The last of the above commands will reset the energy counter.
 If you encounter any problems with this library, please open a new issue. Before
 you do, however, please consult the documentation of the original library to
 avoid typical pitfalls.
+
+If you encounter the compile time error `fatal: Couldn't find remote ref master`,
+add a version tag to this library in your projects `mos.yml`:
+```yml
+libs:
+  - origin: https://github.com/yaourdt/mgos-hlw8012
+    version: main
+```
 
 ## Acknowledgments
 This library is a wrapper around [xoseperez/hlw8012](https://github.com/xoseperez/hlw8012).
