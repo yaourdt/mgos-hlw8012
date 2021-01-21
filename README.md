@@ -3,6 +3,10 @@
 A HLW8012 and BL0937 energy meter library for Mongoose OS.
 
 ## Usage
+
+> ⚠ DO NOT CONNECT TO SERIAL LINE WHEN THE HLW8012 / BL0937 IS WORKING (ie when it is connected to the mains)!
+> Use UDP logging instead.
+
 Add the following to your projects `mos.yml`, and configure the respective GPIO
 pins:
 
