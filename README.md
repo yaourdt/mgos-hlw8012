@@ -52,6 +52,7 @@ If you encounter any problems with this library, please open a new issue. Before
 you do, however, please consult the documentation of the original library to
 avoid typical pitfalls.
 
+## Known Issues
 If you encounter the compile time error `fatal: Couldn't find remote ref master`,
 add a version tag to this library in your projects `mos.yml`:
 ```yml
@@ -59,6 +60,10 @@ libs:
   - origin: https://github.com/yaourdt/mgos-hlw8012
     version: main
 ```
+
+Readings may not be very reliable due to flaws in the underlying hardware. This
+library will not correct erroneous readings. See [#3](https://github.com/xoseperez/hlw8012/issues/3)
+and [#11](https://github.com/xoseperez/hlw8012/issues/11) for details.
 
 ## Acknowledgments
 This library is a wrapper around [xoseperez/hlw8012](https://github.com/xoseperez/hlw8012).
