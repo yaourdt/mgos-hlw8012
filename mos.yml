@@ -1,7 +1,7 @@
 author: mark dornbach <mark@dornbach.io>
 description: HLW8012 and BL0937 sensors library
 type: lib
-version: 0.0.1
+version: 0.1.0
 
 platforms:           ["esp32", "esp8266"]
 manifest_version:    2020-01-29

@@ -3,9 +3,67 @@
 A HLW8012 and BL0937 energy meter library for Mongoose OS.
 
 ## Usage
-TODO:
- - Write this text
- - SNTP should reset the energy counter
+
+> ⚠ DO NOT CONNECT TO SERIAL LINE WHEN THE HLW8012 / BL0937 IS WORKING (ie when it is connected to the mains)!
+> Use UDP logging instead.
+
+Add the following to your projects `mos.yml`, and configure the respective GPIO
+pins:
+
+```yml
+config_schema:
+  - ["hlw8012.cf_pin", -1, {title: "cf_pin"}]
+  - ["hlw8012.cf1_pin", -1, {title: "cf1_pin"}]
+  - ["hlw8012.sel_pin", -1, {title: "sel_pin"}]
+
+libs:
+  - origin: https://github.com/yaourdt/mgos-hlw8012
+```
+
+Further parameters can be found in this libraries `mos.yml` file, all of them
+are explained in further detail in the [original library](https://github.com/xoseperez/hlw8012).
+
+First use requires [a manual calibration](https://github.com/xoseperez/hlw8012#manual-calibration).
+Use a pure resistive load with a well-known power consumption (e.g. a water
+kettle). Example for a device with 10 A current draw at 220V:
+
+```
+mgos_hlw8012_expectedCurrent(10.0);
+mgos_hlw8012_expectedVoltage(220);
+mgos_hlw8012_expectedActivePower(2200);
+```
+
+Subsequently, energy values can be read as
+
+```
+double current = mgos_hlw8012_getCurrent();
+unsigned int voltage = mgos_hlw8012_getVoltage();
+unsigned int active_power = mgos_hlw8012_getActivePower();
+unsigned int apparent_power = mgos_hlw8012_getApparentPower();
+unsigned int reactive_power = mgos_hlw8012_getReactivePower();
+double power_factor = mgos_hlw8012_getPowerFactor();
+unsigned long energy = mgos_hlw8012_getEnergy();
+mgos_hlw8012_resetEnergy();
+```
+
+The last of the above commands will reset the energy counter.
+
+If you encounter any problems with this library, please open a new issue. Before
+you do, however, please consult the documentation of the original library to
+avoid typical pitfalls.
+
+## Known Issues
+If you encounter the compile time error `fatal: Couldn't find remote ref master`,
+add a version tag to this library in your projects `mos.yml`:
+```yml
+libs:
+  - origin: https://github.com/yaourdt/mgos-hlw8012
+    version: main
+```
+
+Readings may not be very reliable due to flaws in the underlying hardware. This
+library will not correct erroneous readings. See [#3](https://github.com/xoseperez/hlw8012/issues/3)
+and [#11](https://github.com/xoseperez/hlw8012/issues/11) for details.
 
 ## Acknowledgments
 This library is a wrapper around [xoseperez/hlw8012](https://github.com/xoseperez/hlw8012).
